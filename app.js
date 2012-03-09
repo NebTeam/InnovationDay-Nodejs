@@ -3,30 +3,42 @@ var express = require('express');
 
 var app = express.createServer();
 
+var mongoose = require('mongoose');
+
+var Schema = mongoose.Schema
+  , ObjectId = Schema.ObjectId;
+
 // Configuration
 app.configure( function() {
 });
 
+var MessageSchema = new Schema({
+    sender  :  { type: String, default: 'hahaha' }
+  , receiver   :  { type: String, min: 18, index: true }
+  , date  :  { type: Date, default: Date.now }
+});
+
+// var MessageModel = mongoose.model('Message', MessageSchema);
+
 // Routes
 app.get('/', function(req, res) {
-    var Db = require('mongodb').Db;
-    var Connection = require('mongodb').Connection;
-    var Server = require('mongodb').Server;
-    var BSON = require('mongodb').BSON;
-    var ObjectID = require('mongodb').ObjectID;
+    var conn = mongoose.createConnection('mongodb://localhost/innovation-day-nodejs');
+    var MessageModel = conn.model('ModelName', MessageSchema);
+    var m = new MessageModel;
 
-    //res.write('pre open conn');
+    m.sender = 'Danny';
+    m.receiver = 'Chernacov';
+    m.date = new Date();
 
-    db= new Db('innovation-day-nodejs', new Server('localhost', 27017, {auto_reconnect: true}, {}));
-    db.open(function(){});
+    m.save(function(e, message) {
+        console.log(message);
 
-    //res.write('opened conn');
-
-    var messages = db.collection('message', function(error, message_collection) {
-       res.send(message_collection);
+        // why in the hell doesn't this work?
+        MessageModel.find({}).each(function(doc){
+            console.log(doc);
+        });
     });
 
-    //res.send([{ first : 'hist' }]);
     res.end();
 });
 

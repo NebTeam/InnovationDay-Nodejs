@@ -20,8 +20,3 @@ To create the database and dummy records, type the following commands AFTER you 
 
 4. Make sure all 4 records are there by running a <code>db.message.find()</code>
 5. Done!
-
-##Installing node-mongodb-native driver##
-
-    curl -O https://download.github.com/christkv-node-mongodb-native-V0.8.1-91-g54525d8.tar.gz
-    $ tar -xzf christkv-node-mongodb-native-V0.8.1-91-g54525d8.tar.gz

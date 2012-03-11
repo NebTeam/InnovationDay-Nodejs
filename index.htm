@@ -2,19 +2,35 @@
 <head>
 	<title>Simple Node.js Example</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="./javascripts/jquery.tmpl.min.js"></script>
 	<script type="text/javascript">
-	function put(id, data, callback) {
 	    $.ajax('http://127.0.0.1:8080/', {
 	        type: 'GET',
-	        success: function(data) { $("#results").val(data); },
+	        dataType: "JSON",
+	        success: function(data) { $("#messageList").empty(); $("#messageTemplate").tmpl(data).appendTo("#messageList"); },
 	        error  : function() { alert("error"); }
 	    });
 	</script>
+	<script id="messageTemplate" type="text/x-jquery-tmpl">
+		<div class="messageContainer">
+			<h3>${title}</h3>
+			<span class="messageMetadataLabel">To: </span><span>${recipient}</span> | 
+			<span class="messageMetadataLabel">From: </span><span>${sender}</span> | 
+			<span class="messageMetadataLabel">Sent at: </span><span>${senttimestamp}</span>
+			<div class="messageBody">${body}</div>
+		</div>
+	</script>
+	<style>
+		.body { font-family: Verdana; font-size: 1em; }
+		.messageContainer { background-color: #ccc; border: 4px solid lightblue; padding: 10px; margin: 10px; color: #333; }
+		.messageMetadataLabel { font-weight: bold; }
+		.messageBody { margin-top: 10px; }
+	</style>
 </head>
 <body>
 	<br />
-	<h1>Simple Node.js Example:</h1>
-	<p id="results" style="width: 100%; height: 50px; background-color: #ccc; border: 1px solid #333;">
+	<h1>Simple Node.js Message List Example:</h1>
+	<p id="messageList">
 	</p>
 </body>
 </html>

@@ -3,9 +3,9 @@
 1. Install Homebrew: https://github.com/mxcl/homebrew/wiki/installation
 2. Install Node: Run <pre><code>brew install node</code></pre>
 3. Install Node Package Manager: Run <pre><code>brew install npm</code></pre>
-4. Install MonogoDB: 
-	**Quickstart - Mac**: http://www.mongodb.org/display/DOCS/Quickstart+OS+X   
-	**Quickstart - Windows**: http://www.mongodb.org/display/DOCS/Quickstart+Windows
+4. Install MonogoDB:  
+		**Mac**: http://www.mongodb.org/display/DOCS/Quickstart+OS+X     
+		**Windows**: http://www.mongodb.org/display/DOCS/Quickstart+Windows
 5. Install Mongoose: <pre><code>npm install mongoose</code></pre>
 
 ##Setup MongoDB and database##
